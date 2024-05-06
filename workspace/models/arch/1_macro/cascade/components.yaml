@@ -1,0 +1,65 @@
+{{include_text('defines.yaml')}}
+
+compound_components:
+  version: 0.4         # REQUIRED version number
+  classes:
+  # ===========================================================================
+  - name: cascade_tia
+    attributes:
+      # technology: technology
+      capacitance: 1e-15
+      voltage: VOLTAGE
+      v_sense: VOLTAGE/2
+      width: 32
+      stacked: False
+
+    subcomponents:
+    - name: cap_1
+      class: capacitor
+      attributes:
+        capacitance: capacitance
+        voltage: v_sense
+        width: width
+        stacked: stacked
+
+    - name: cap_2
+      class: capacitor
+      attributes:
+        capacitance: capacitance
+        voltage: voltage
+        width: width
+        stacked: stacked
+
+    actions:
+    - name: read
+      subcomponents:
+      - name: cap_1
+        actions:
+        - name: raise_voltage_to
+          arguments: {target_voltage: v_sense}
+          energy_scale: 1
+
+      - name: cap_2
+        actions:
+        - name: raise_voltage_to
+          arguments: {target_voltage: voltage}
+          energy_scale: 1
+
+    - name: write
+      subcomponents:
+      - name: cap_1
+        actions:
+        - name: raise_voltage_to
+          arguments: {target_voltage: 0}
+          energy_scale: 1
+
+      - name: cap_2
+        actions:
+        - name: raise_voltage_to
+          arguments: {target_voltage: v_sense}
+          energy_scale: 1
+
+    # - {name: read, subcomponents: [{name: cap_1, actions: [name: read]}, {name: cap_2, actions: [name: read]}]} 
+    # - {name: write, subcomponents: [{name: cap_1, actions: [name: write]}, {name: cap_2, actions: [name: write]}]}
+    - {name: update, subcomponents: [{name: cap_1, actions: [name: update]}, {name: cap_2, actions: [name: update]}]}
+    - {name: leak, subcomponents: [{name: cap_1, actions: [name: leak]}, {name: cap_2, actions: [name: leak]}]}
