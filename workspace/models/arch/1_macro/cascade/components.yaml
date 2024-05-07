@@ -6,7 +6,6 @@ compound_components:
   # ===========================================================================
   - name: cascade_tia
     attributes:
-      # technology: technology
       capacitance: 1e-15
       voltage: VOLTAGE
       v_sense: VOLTAGE/2
@@ -63,3 +62,22 @@ compound_components:
     # - {name: write, subcomponents: [{name: cap_1, actions: [name: write]}, {name: cap_2, actions: [name: write]}]}
     - {name: update, subcomponents: [{name: cap_1, actions: [name: update]}, {name: cap_2, actions: [name: update]}]}
     - {name: leak, subcomponents: [{name: cap_1, actions: [name: leak]}, {name: cap_2, actions: [name: leak]}]}
+
+  # - name: cascade_buffer
+  #   attributes:
+  #     width: 16
+  #     depth: 64
+
+  #   subcomponents:
+  #   - name: column_drivers
+  #     <<<: [*component_defaults, *keep_outputs, *no_coalesce]
+  #     class: column_drivers
+  #     attributes: {width: width, depth: depth, <<: *cim_component_attributes}
+
+  #   actions:
+  #   - name: read # Read action processes a value
+  #     subcomponents: [{name: column_drivers, actions: [{name: read}]}]
+  #   - name: leak
+  #     subcomponents: [{name: column_drivers, actions: [{name: leak}]}]
+  #   - {name: write, subcomponents: []} # Unused
+  #   - {name: update, subcomponents: []} # Unused

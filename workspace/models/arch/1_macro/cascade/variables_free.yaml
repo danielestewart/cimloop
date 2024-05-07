@@ -16,7 +16,7 @@ variables:
   # ===========================================================================
   ENCODED_INPUT_BITS:  INPUT_BITS
   ENCODED_WEIGHT_BITS: WEIGHT_BITS
-  ENCODED_OUTPUT_BITS: 7
+  ENCODED_OUTPUT_BITS: OUTPUT_BITS
 
   INPUT_ENCODING_FUNC: offset_encode_hist
   WEIGHT_ENCODING_FUNC: offset_encode_hist
@@ -31,7 +31,7 @@ variables:
   # ===========================================================================
   # Data Converters
   # ===========================================================================
-  ADC_RESOLUTION: 7
+  ADC_RESOLUTION: 10
   VOLTAGE_DAC_RESOLUTION: 16
   TEMPORAL_DAC_RESOLUTION: 1
   DAC_RESOLUTION: max(VOLTAGE_DAC_RESOLUTION, TEMPORAL_DAC_RESOLUTION)
